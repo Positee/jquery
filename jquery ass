@@ -1,0 +1,45 @@
+$(document).ready(function() {
+
+  // Target the box with flexibility for various selectors
+  var box = $('.my-box');  // Target by class
+  // var box = $('#my-box');  // Target by ID
+  // var box = $('div[data-box-id="my-box"]');  // Target by data attribute
+
+  // Function to change the box's color with robust error handling
+  function changeBoxColor(newColor) {
+    try {
+      box.css('background-color', newColor);
+      console.log('Box color changed to:', newColor);
+    } catch (error) {
+      console.error('Error changing box color:', error);
+      // Handle the error gracefully, e.g., display a user-friendly message
+    }
+  }
+
+  // Multiple ways to initiate color change:
+
+  // 1. Trigger on a button click with visual feedback:
+  $('#change-color-button').click(function() {
+    var newColor = prompt('Enter a new color:');
+    changeBoxColor(newColor);
+  });
+
+  // 2. Change color automatically on page load:
+  changeBoxColor('lightblue');
+
+  // 3. Cycle through colors every 2 seconds:
+  var colors = ['red', 'green', 'blue', 'orange', 'purple'];
+  var currentColorIndex = 0;
+  setInterval(function() {
+    changeBoxColor(colors[currentColorIndex]);
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+  }, 2000);
+
+  // 4. Change color based on user interaction (e.g., hover):
+  box.hover(function() {
+    changeBoxColor('yellow');
+  }, function() {
+    changeBoxColor('lightblue');
+  });
+
+});
